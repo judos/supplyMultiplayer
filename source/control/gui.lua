@@ -36,3 +36,30 @@ function update_time_left()
 		end
 	end
 end
+
+function updatePlayerGui(player)
+	if player.gui.top.supply then
+		player.gui.top.destroy()
+	end
+	local level = levels[global.supply.level] 
+	local frame = player.gui.top.add{type="frame", name="supply", direction="vertical", caption = {"", {"level"}, " ", global.supply.level}}
+	frame.add{type="label", name="time_left"}
+	frame.add{type="label", caption={"", {"points-per-second"}, ": ", pointsPerSecond()}}
+	frame.add{type="label", caption={"", {"points"}, ": ", math.floor(global.supply.points)}}
+	frame.add{type="label", caption={"", {"required-items"}, ":"}, style="caption_label_style"}
+	local table = frame.add{type="table", name="table", colspan=2}
+	for index, item in pairs(level.requirements) do
+		table.add{type="label", caption=game.item_prototypes[item.name].localised_name}
+		table.add{type="label", caption="0/" .. item.count, name=item.name}
+	end
+
+	if global.supply.level < #levels then
+		local next_level = levels[global.supply.level + 1]
+		frame.add{type="label", caption={"", {"next-level"}, ":"}, style="caption_label_style"}
+		local table = frame.add{type="table", colspan=2}
+		for index, item in pairs(next_level.requirements) do
+			table.add{type="label", caption=game.item_prototypes[item.name].localised_name}
+			table.add{type="label", caption=item.count}
+		end
+	end
+end

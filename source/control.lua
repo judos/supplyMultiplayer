@@ -1,4 +1,5 @@
 require "defines"
+require "libs.functions"
 require "control.functions"
 require "control.gui"
 require "control.initialize"
@@ -19,6 +20,9 @@ script.on_configuration_changed(function(event)
 end)
 
 script.on_init(function()
+	init()
+end)
+script.on_load(function()
 	init()
 end)
 
@@ -42,14 +46,39 @@ script.on_event(defines.events.on_tick, function(event)
 	end
 end)
 
+script.on_event(defines.events.on_built_entity, function(event)
+	entityBuilt(event)
+end)
+script.on_event(defines.events.on_robot_built_entity, function(event)
+	entityBuilt(event)
+end)
+
 ----------------------------------------------------------------
 -- Functions
 ----------------------------------------------------------------
 
 function calculateAccumulated()
 	local level = levels[global.supply.level]
-	global.supply.accumulated = {}
+	local accumulated = {}
 	for _,item in pairs(level.requirements) do
-		global.supply.accumulated[item.name] = 0
+		accumulated[item.name] = 0
 	end
+	for i = #global.supply.chests,1,-1 do
+		local chest = global.supply.chests[i]
+		if not chest.valid then
+			table.remove(global.supply.chests,i)
+		else
+			accumulated = addContentsTables(accumulated, chest.get_inventory(defines.inventory.chest).get_contents())
+		end
+	end
+	global.supply.accumulated = accumulated
+end
+
+function entityBuilt(event)
+	local entity = event.created_entity
+	local name = entity.name
+	if name~="supply-chest" then
+		return
+	end
+	table.insert(global.supply.chests,entity)
 end
