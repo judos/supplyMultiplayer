@@ -1,3 +1,5 @@
+require "util"
+
 function update_info()
 	for _,player in pairs(game.players) do 
 		local frame = player.gui.top.supply

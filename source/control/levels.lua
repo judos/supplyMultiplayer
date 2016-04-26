@@ -29,14 +29,3 @@ addLevel{500,"science-pack-1",20,"science-pack-2",20,"science-pack-3",20}
 addLevel{500,"science-pack-1",30,"science-pack-2",30,"science-pack-3",30,"rocket",20}
 addLevel{600,"science-pack-1",40,"science-pack-2",40,"science-pack-3",40,"rocket",20,"explosive-rocket",20}
 addLevel{600,"science-pack-1",50,"science-pack-2",50,"science-pack-3",50,"alien-science-pack",50}
-
-function addLevel(data)
-	if data.count < 1 then error("level needs a defined time-span as first table item") end
-	if data.count % 2 ~= 2 then error("level needs for every item an amount defined") end
-	local level={requirements={},time=data[1]}
-	for i=2,data.count-1,2 do
-		table.insert(level.requirements,{name=data[i],count=data[i+1]})
-	end
-	table.insert(levels,level)
-end
-
