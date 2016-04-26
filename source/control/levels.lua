@@ -5,232 +5,38 @@ levels= {
 			{ name = "stone", count = 15 }
 		},
 		time = 240,
-	},
-
-	-- 2
-	{
-		requirements = {
-			{ name ="iron-plate", count = 30}
-		},
-		time = 300
-	},
-
-	-- 3
-	{
-		requirements = {
-			{ name ="iron-plate", count = 30},
-			{ name ="copper-plate", count = 30}
-		},
-		time = 300
-	},
-
-	-- 4
-	{
-		requirements = {
-			{ name ="iron-plate", count = 30},
-			{ name ="iron-gear-wheel", count = 30},
-		},
-		time = 300
-	},
-
-	-- 5
-	{
-		requirements = {
-			{ name ="iron-plate", count = 40},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="copper-cable", count = 40}
-		},
-		time = 300
-	},
-
-	-- 6
-	{
-		requirements = {
-			{ name ="iron-plate", count = 40},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-		},
-		time = 300
-	},
-
-	-- 7
-	{
-		requirements = {
-			{ name ="iron-plate", count = 40},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 10},
-		},
-		time = 300
-	},
-
-	-- 8
-	{
-		requirements = {
-			{ name ="iron-plate", count = 40},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 10},
-			{ name ="basic-transport-belt", count = 20},
-		},
-		time = 300
-	},
-
-	-- 9
-	{
-		requirements = {
-			{ name ="iron-plate", count = 50},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 10},
-			{ name ="basic-transport-belt", count = 20},
-			{ name ="basic-inserter", count = 20},
-		},
-		time = 300
-	},
-
-	-- 10
-	{
-		requirements = {
-			{ name ="iron-plate", count = 50},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 10},
-			{ name ="science-pack-2", count = 10}
-		},
-		time = 300
-	},
-
-	-- 11
-	{
-		requirements = {
-			{ name ="iron-plate", count = 50},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="fast-transport-belt", count = 10}
-		},
-		time = 300
-	},
-
-	-- 12
-	{
-		requirements = {
-			{ name ="iron-plate", count = 50},
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="steel-plate", count = 10}
-		},
-		time = 420
-	},
-
-	-- 13
-	{
-		requirements = {
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="steel-plate", count = 15},
-			{ name ="piercing-bullet-magazine", count = 50}
-		},
-		time = 300
-	},
-
-	-- 14
-	{
-		requirements = {
-			{ name ="iron-gear-wheel", count = 30},
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="steel-plate", count = 15},
-			{ name ="plastic-bar", count = 5}
-		},
-		time = 600
-	},
-
-	-- 15
-	{
-		requirements = {
-			{ name ="electronic-circuit", count = 30},
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="steel-plate", count = 15},
-			{ name ="advanced-circuit", count = 10}
-		},
-		time = 500
-	},
-
-	-- 16
-	{
-		requirements = {
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="steel-plate", count = 15},
-			{ name ="advanced-circuit", count = 10},
-			{ name ="battery", count = 10}
-		},
-		time = 500
-	},
-
-	-- 17
-	{
-		requirements = {
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="steel-plate", count = 15},
-			{ name ="advanced-circuit", count = 10},
-			{ name ="battery", count = 10},
-			{ name ="smart-inserter", count = 10}
-		},
-		time = 500
-	},
-
-	-- 18
-	{
-		requirements = {
-			{ name ="science-pack-1", count = 20},
-			{ name ="science-pack-2", count = 20},
-			{ name ="science-pack-3", count = 20}
-		},
-		time = 500
-	},
-
-	-- 19
-	{
-		requirements = {
-			{ name ="science-pack-1", count = 30},
-			{ name ="science-pack-2", count = 30},
-			{ name ="science-pack-3", count = 30},
-			{ name ="rocket", count = 20},
-		},
-		time = 500
-	},
-
-	-- 20
-	{
-		requirements = {
-			{ name ="science-pack-1", count = 40},
-			{ name ="science-pack-2", count = 40},
-			{ name ="science-pack-3", count = 40},
-			{ name ="rocket", count = 20},
-			{ name ="explosive-rocket", count = 20},
-		},
-		time = 600
-	},
-
-	-- 21
-	{
-		requirements = {
-			{ name ="science-pack-1", count = 50},
-			{ name ="science-pack-2", count = 50},
-			{ name ="science-pack-3", count = 50},
-			{ name ="alien-science-pack", count = 50}
-		},
-		time = 700
 	}
 }
+
+--   time (s)   item     count   item count					...
+addLevel{300,"iron-plate",30}
+addLevel{300,"iron-plate",30,"copper-plate",30}
+addLevel{300,"iron-plate",30,"iron-gear-wheel",30}
+addLevel{300,"iron-plate",40,"iron-gear-wheel",30,"copper-cable",40}
+addLevel{300,"iron-plate",40,"iron-gear-wheel",30,"electronic-circuit",30}
+addLevel{300,"iron-plate",40,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",10}
+addLevel{300,"iron-plate",40,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",10,"basic-transport-belt",20}
+addLevel{300,"iron-plate",50,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",10,"basic-transport-belt",20,"basic-inserter",20}
+addLevel{300,"iron-plate",50,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",10,"science-pack-2",10}
+addLevel{300,"iron-plate",50,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",20,"science-pack-2",20,"fast-transport-belt",10}
+addLevel{420,"iron-plate",50,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",20,"science-pack-2",20,"steel-plate",10}
+addLevel{300,"iron-plate",50,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",20,"science-pack-2",20,"steel-plate",15,"piercing-bullet-magazine",50}
+addLevel{600,"iron-gear-wheel",30,"electronic-circuit",30,"science-pack-1",20,"science-pack-2",20,"steel-plate",15,"plastic-bar",5}
+addLevel{500,"electronic-circuit",30,"science-pack-1",20,"science-pack-2",20,"steel-plate",15,"advanced-circuit",10}
+addLevel{500,"science-pack-1",20,"science-pack-2",20,"steel-plate",15,"advanced-circuit",10,"battery",10}
+addLevel{500,"science-pack-1",20,"science-pack-2",20,"steel-plate",15,"advanced-circuit",10,"battery",10,"smart-inserter",10}
+addLevel{500,"science-pack-1",20,"science-pack-2",20,"science-pack-3",20}
+addLevel{500,"science-pack-1",30,"science-pack-2",30,"science-pack-3",30,"rocket",20}
+addLevel{600,"science-pack-1",40,"science-pack-2",40,"science-pack-3",40,"rocket",20,"explosive-rocket",20}
+addLevel{600,"science-pack-1",50,"science-pack-2",50,"science-pack-3",50,"alien-science-pack",50}
+
+function addLevel(data)
+	if data.count < 1 then error("level needs a defined time-span as first table item") end
+	if data.count % 2 ~= 2 then error("level needs for every item an amount defined") end
+	local level={requirements={},time=data[1]}
+	for i=2,data.count-1,2 do
+		table.insert(level.requirements,{name=data[i],count=data[i+1]})
+	end
+	table.insert(levels,level)
+end
+
