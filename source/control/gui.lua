@@ -4,7 +4,7 @@ function update_info()
 		local level = levels[global.supply.level]
 		local table=frame.table
 		for index, item in pairs(level.requirements) do
-			local accumulated = global.accumulated[item.name]
+			local accumulated = global.supply.accumulated[item.name]
 			local label = table[item.name]
 			label.caption = accumulated .. "/" .. item.count
 			if accumulated == item.count then

@@ -2,7 +2,8 @@ require "defines"
 require "control.levels"
 require "control.gui"
 require "control.initialize"
-
+require "control.functions"
+require "config"
 
 ----------------------------------------------------------------
 -- Script
@@ -36,14 +37,10 @@ script.on_event(defines.events.on_tick, function(event)
 	if event.tick % 60 ~= 0 then return end
 	
 	for index,player in pairs(game.players) do
-		updatePlayer(player)
+		update_info()
 	end
 end)
 
 ----------------------------------------------------------------
 -- Functions
 ----------------------------------------------------------------
-
-function updatePlayer(player)
-
-end
