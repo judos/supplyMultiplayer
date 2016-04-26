@@ -50,21 +50,6 @@ story_table = {
 					return true
 				end
 
-				local result = true
-				for index, item in pairs(level.requirements) do
-					local accumulated = global.accumulated[item.name]
-					if accumulated < item.count then
-						result = false
-					end
-				end
-
-				if result then
-					for _,player in pairs(game.players) do
-						if player.gui.top.next_level == nil then
-							player.gui.top.add{type = "button", name = "next_level", caption={"next-level"}}
-						end
-					end
-				end
 
 				if time_left <= 0 then
 					if result == false then

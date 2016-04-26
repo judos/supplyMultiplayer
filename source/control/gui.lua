@@ -1,8 +1,8 @@
 require "util"
 
 function update_info()
+	local fullFilled = isLevelRequirementFullfilled() 
 	for _,player in pairs(game.players) do 
-		updatePlayerGui(player)
 		local frame = player.gui.top.supply
 		local level = levels[global.supply.level]
 		local table=frame.table
@@ -14,6 +14,11 @@ function update_info()
 				label.style.font_color = {g=0.8}
 				table["t"..item.name].style.font_color = {g=0.8}
 			end
+		end
+		if fullFilled and frame.nextButton == nil then
+			frame.add{type = "button", name = "nextButton", caption={"next-level"}}
+		elseif not fullFilled and frame.nextButton ~= nil then
+			frame.nextButton.destroy()
 		end
 	end
 	update_time_left()

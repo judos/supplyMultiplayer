@@ -13,3 +13,28 @@ function addLevel(data)
 	table.insert(levels,level)
 end
 
+
+function calculateAccumulated()
+	local level = levels[global.supply.level]
+	local accumulated = {}
+	for _,item in pairs(level.requirements) do
+		accumulated[item.name] = 0
+	end
+	for i = #global.supply.chests,1,-1 do
+		local chest = global.supply.chests[i]
+		if not chest.valid then
+			table.remove(global.supply.chests,i)
+		else
+			accumulated = addContentsTables(accumulated, chest.get_inventory(defines.inventory.chest).get_contents())
+		end
+	end
+	global.supply.accumulated = accumulated
+end
+
+function isLevelRequirementFullfilled()
+	local level = levels[global.supply.level]
+	for _,item in pairs(level.requirements) do
+		if global.supply.accumulated[item.name] < item.count then return false end
+	end
+	return true
+end
