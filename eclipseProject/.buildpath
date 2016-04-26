@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="source"/>
+	<buildpathentry exported="true" kind="con" path="org.eclipse.ldt.ExecutionEnvironmentContainer/lua/5.1"/>
+	<buildpathentry external="true" kind="lib" path="D:/games/Factorio/Factorio modding/data/core/lualib"/>
+</buildpath>
