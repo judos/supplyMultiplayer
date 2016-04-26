@@ -1,7 +1,7 @@
 function update_info()
 	for _,player in pairs(game.players) do 
-		local frame = player.gui.top.frame
-		local level = levels[global.level]
+		local frame = player.gui.top.supply
+		local level = levels[global.supply.level]
 		local table=frame.table
 		for index, item in pairs(level.requirements) do
 			local accumulated = global.accumulated[item.name]
@@ -16,7 +16,7 @@ function update_info()
 end
 
 function get_time_left()
-	return global.level_started_at + time_modifier * levels[global.level].time * 60 - game.tick
+	return global.supply.level_started_at + time_modifier * levels[global.supply.level].time * 60 - game.tick
 end
 
 function update_time_left()
@@ -25,8 +25,8 @@ function update_time_left()
 		time_left = 0
 	end
 	for _,player in pairs(game.players) do 
-		if player.gui.top.frame then
-			local label = player.gui.top.frame.time_left
+		if player.gui.top.supply then
+			local label = player.gui.top.supply.time_left
 			label.caption = {"", {"time-left"}, ": ", util.formattime(time_left)}
 			if time_left == 60 * 30 then
 				label.style.font_color = {r=1}
