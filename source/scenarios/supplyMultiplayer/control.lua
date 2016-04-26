@@ -102,27 +102,24 @@ story_table = {
 		},
 		{
 			name = "level-progress",
-			update =
-			function(event)
+			update = function(event)
 				local update_info_needed = false
 				local level = levels[global.level]
 				for index, chest in pairs(global.chests) do
 					local inventory = chest.get_inventory(defines.inventory.chest)
 					local contents = inventory.get_contents()
 					for itemname, count in pairs(contents) do
-						if global.accumulated[itemname] == nil then
-						--goto continue
+						if global.accumulated[itemname] ~= nil then
+							local counttoconsume = global.required[itemname] - global.accumulated[itemname]
+							if counttoconsume > count then
+								counttoconsume = count
+							end
+							if counttoconsume ~= 0 then
+								inventory.remove{name = itemname, count = counttoconsume}
+								global.accumulated[itemname] = global.accumulated[itemname] + counttoconsume
+								update_info_needed = true
+							end
 						end
-						local counttoconsume = global.required[itemname] - global.accumulated[itemname]
-						if counttoconsume > count then
-							counttoconsume = count
-						end
-						if counttoconsume ~= 0 then
-							inventory.remove{name = itemname, count = counttoconsume}
-							global.accumulated[itemname] = global.accumulated[itemname] + counttoconsume
-							update_info_needed = true
-						end
-						--::continue::
 					end
 				end
 				if update_info_needed then
