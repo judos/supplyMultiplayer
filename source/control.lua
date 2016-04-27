@@ -3,8 +3,8 @@ require "libs.functions"
 require "control.functions"
 require "control.gui"
 require "control.initialize"
-require "control.levels"
 require "config"
+require "levels"
 
 ----------------------------------------------------------------
 -- Script
@@ -29,7 +29,10 @@ end)
 script.on_event(defines.events.on_gui_click, function(event)
 	local player = game.players[event.player_index]
 	local force = player.force
-	if event.element.name == "supplyMultiplayer.nextLevel" then
+	if event.element == player.gui.top.supply.nextButton then
+		if subtractRequirements() then
+			nextLevel()
+		end
 	end
 end)
 

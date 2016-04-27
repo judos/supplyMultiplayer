@@ -8,33 +8,6 @@ require "defines"
 story_table = {
 	{
 		{
-			name = "level-progress",
-			update = function(event)
-				local update_info_needed = false
-				local level = levels[global.level]
-				for index, chest in pairs(global.chests) do
-					local inventory = chest.get_inventory(defines.inventory.chest)
-					local contents = inventory.get_contents()
-					for itemname, count in pairs(contents) do
-						if global.accumulated[itemname] ~= nil then
-							local counttoconsume = global.required[itemname] - global.accumulated[itemname]
-							if counttoconsume > count then
-								counttoconsume = count
-							end
-							if counttoconsume ~= 0 then
-								inventory.remove{name = itemname, count = counttoconsume}
-								global.accumulated[itemname] = global.accumulated[itemname] + counttoconsume
-								update_info_needed = true
-							end
-						end
-					end
-				end
-				if update_info_needed then
-					update_info()
-				end
-				update_time_left()
-			end,
-
 			condition = function(event)
 				local level = levels[global.level]
 				local time_left = get_time_left()

@@ -13,6 +13,9 @@ function update_info()
 			if accumulated >= item.count then
 				label.style.font_color = {g=0.8}
 				table["t"..item.name].style.font_color = {g=0.8}
+			else
+				label.style.font_color = nil
+				table["t"..item.name].style.font_color = nil
 			end
 		end
 		if fullFilled and frame.nextButton == nil then
@@ -22,10 +25,6 @@ function update_info()
 		end
 	end
 	update_time_left()
-end
-
-function get_time_left()
-	return global.supply.level_started_at + time_modifier * levels[global.supply.level].time * 60 - game.tick
 end
 
 function update_time_left()
@@ -69,4 +68,5 @@ function updatePlayerGui(player)
 			table.add{type="label", caption=item.count}
 		end
 	end
+	update_time_left()
 end

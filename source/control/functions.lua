@@ -13,6 +13,24 @@ function addLevel(data)
 	table.insert(levels,level)
 end
 
+function get_time_left()
+	return global.supply.level_started_at + time_modifier * levels[global.supply.level].time * 60 - game.tick
+end
+
+function nextLevel()
+	local time_left = get_time_left()
+	local seconds_left = math.floor(time_left / 60)
+	local points_addition = math.floor(seconds_left * pointsPerSecond())
+	PlayerPrint({"time-bonus", points_addition, seconds_left})
+	global.supply.points = global.supply.points + points_addition
+	
+	global.supply.level = global.supply.level + 1
+	global.supply.level_started_at = game.tick
+	for _,player in pairs(game.players) do
+		updatePlayerGui(player)
+	end
+end
+
 
 function calculateAccumulated()
 	local level = levels[global.supply.level]
@@ -35,6 +53,30 @@ function isLevelRequirementFullfilled()
 	local level = levels[global.supply.level]
 	for _,item in pairs(level.requirements) do
 		if global.supply.accumulated[item.name] < item.count then return false end
+	end
+	return true
+end
+
+-- returns: true when succeeded
+function subtractRequirements()
+	calculateAccumulated()
+	if not isLevelRequirementFullfilled() then return false end
+	local toRemove = deepcopy(levels[global.supply.level].requirements)
+	for _,chest in pairs(global.supply.chests) do
+		local inventory = chest.get_inventory(defines.inventory.chest)
+		local contents = inventory.get_contents()
+		for itemName, count in pairs(contents) do
+			if toRemove[itemName] ~= nil then
+				local countToConsume = toRemove[itemName]
+				if countToConsume > count then
+					countToConsume = count
+				end
+				if countToConsume ~= 0 then
+					inventory.remove{name = itemName, count = countToConsume}
+					toRemove[itemName] = toRemove[itemName] - countToConsume
+				end
+			end
+		end
 	end
 	return true
 end
