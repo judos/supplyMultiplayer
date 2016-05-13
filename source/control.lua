@@ -37,7 +37,7 @@ script.on_event(defines.events.on_gui_click, function(event)
 			calculateAccumulated()
 			update_info()
 		end
-	elseif name == "supplyMp.close" then
+	elseif name == close_button then
 		player.gui.top.supply.destroy()
 	end
 end)
