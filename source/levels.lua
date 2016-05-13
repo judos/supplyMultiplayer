@@ -1,14 +1,7 @@
-levels= {
-	-- 1
-	{
-		requirements = {
-			stone = 15
-		},
-		time = 240,
-	}
-}
+levels= {}
 
 --   time (s)   item     count   item count					...
+addLevel{240,"stone",15}
 addLevel{300,"iron-plate",30}
 addLevel{300,"iron-plate",30,"copper-plate",30}
 addLevel{300,"iron-plate",30,"iron-gear-wheel",30}
