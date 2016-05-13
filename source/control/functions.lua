@@ -13,9 +13,33 @@ function addLevel(data)
 	table.insert(levels,level)
 end
 
+function checkNextLevelAndWinConditions()
+	local time_left = get_time_left()
+	if time_left < 0 then
+		local fullFilled = isLevelRequirementFullfilled()
+		if fullFilled then
+			if subtractRequirements() then
+				local points_addition = global.supply.level * 10
+				PlayerPrint({"level-completed", global.supply.level, points_addition})
+				nextLevel()
+			else
+				fullFilled = false
+			end
+		end
+		if not fullFilled then
+			for _,player in pairs(game.players) do
+				player.set_ending_screen_data({"points-achieved", global.supply.points})
+			end
+			game.set_game_state{game_finished=true, player_won=false}
+		end
+	end
+end
+
 function get_time_left()
 	local pastTime = global.supply.level_started_at - game.tick
-	return time_modifier * levels[global.supply.level].time * 60 + pastTime
+	local level = levels[global.supply.level]
+	if not level then return 0 end
+	return time_modifier * level.time * 60 + pastTime
 end
 
 function nextLevel()
@@ -34,12 +58,21 @@ function nextLevel()
 	for _,player in pairs(game.players) do
 		updatePlayerGui(player)
 	end
+	
+	if global.supply.level > #levels then
+		PlayerPrint({"points-achieved",global.supply.points})
+		for _,player in pairs(game.players) do
+			player.set_ending_screen_data({"points-achieved", global.supply.points})
+		end
+		game.set_game_state{game_finished=true, player_won=true, can_continue=true}
+	end
 end
 
 
 function calculateAccumulated()
 	local level = levels[global.supply.level]
 	local accumulated = {}
+	if not level then return end
 	for itemName,count in pairs(level.requirements) do
 		accumulated[itemName] = 0
 	end
@@ -56,6 +89,7 @@ end
 
 function isLevelRequirementFullfilled()
 	local level = levels[global.supply.level]
+	if not level then return nil end
 	for itemName,count in pairs(level.requirements) do
 		if global.supply.accumulated[itemName] < count then return false end
 	end

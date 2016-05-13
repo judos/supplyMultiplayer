@@ -28,13 +28,17 @@ end)
 
 script.on_event(defines.events.on_gui_click, function(event)
 	local player = game.players[event.player_index]
-	local force = player.force
-	if event.element == player.gui.top.supply.nextButton then
+	if not player.gui.top.supply then return end
+	local name = event.element.name
+	info(name) 
+	if name == next_button then
 		if subtractRequirements() then
 			nextLevel()
 			calculateAccumulated()
 			update_info()
 		end
+	elseif name == "supplyMp.close" then
+		player.gui.top.supply.destroy()
 	end
 end)
 
@@ -47,25 +51,7 @@ script.on_event(defines.events.on_tick, function(event)
 
 	calculateAccumulated()
 	update_info()
-	local time_left = get_time_left()
-	if time_left < 0 then
-		local fullFilled = isLevelRequirementFullfilled()
-		if fullFilled then
-			if subtractRequirements() then
-				local points_addition = global.supply.level * 10
-				PlayerPrint({"level-completed", global.supply.level, points_addition})
-				nextLevel()
-			else
-				fullFilled = false
-			end
-		end
-		if not fullFilled then
-			for _,player in pairs(game.players) do
-				player.set_ending_screen_data({"points-achieved", global.supply.points})
-			end
-			game.set_game_state{game_finished=true, player_won=false}
-		end
-	end
+	checkNextLevelAndWinConditions()
 end)
 
 script.on_event(defines.events.on_built_entity, function(event)
