@@ -1,5 +1,7 @@
 function table.addTable(t,toAdd)
-	for k,v in pairs(toAdd) do t[k] = v end
+	if toAdd then
+		for k,v in pairs(toAdd) do t[k] = v end
+	end
 end
 
 function table.set(t) -- set of list
@@ -8,8 +10,13 @@ function table.set(t) -- set of list
   return u
 end
 
+function table.clear(t)
+	local count = #t
+	for i=0, count do t[i]=nil end
+end
+
 function string.starts(str,prefix)
-   return string.sub(str,1,string.len(prefix))==prefix
+  return string.sub(str,1,string.len(prefix))==prefix
 end
 
 function string.ends(str,suffix)
@@ -22,24 +29,25 @@ function round(num, idp)
 end
 
 function split(s, delimiter)
-    result = {}
-    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-        table.insert(result, match)
-    end
-    return result
+  if not s then return {} end
+  result = {}
+	for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+    table.insert(result, match)
+  end
+  return result
 end
 
 function deepcopy(orig)
-    local orig_type = type(orig)
-    local copy
-    if orig_type == 'table' then
-        copy = {}
-        for orig_key, orig_value in next, orig, nil do
-            copy[deepcopy(orig_key)] = deepcopy(orig_value)
-        end
-        setmetatable(copy, deepcopy(getmetatable(orig)))
-    else -- number, string, boolean, etc
-        copy = orig
-    end
-    return copy
+	local orig_type = type(orig)
+	local copy
+	if orig_type == 'table' then
+		copy = {}
+		for orig_key, orig_value in next, orig, nil do
+				copy[deepcopy(orig_key)] = deepcopy(orig_value)
+		end
+		setmetatable(copy, deepcopy(getmetatable(orig)))
+	else -- number, string, boolean, etc
+		copy = orig
+	end
+	return copy
 end
