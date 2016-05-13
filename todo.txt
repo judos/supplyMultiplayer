@@ -1,0 +1,5 @@
+test use cases:
+
+- level ends without enough items
+- level ends with enough items
+- player presses next level button (with/without items)
