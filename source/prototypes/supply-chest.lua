@@ -28,8 +28,8 @@ overwriteContent(supplyChest,{
 	picture = {
 		filename = "__supplyMultiplayer__/graphics/entity/supply-chest.png",
 		priority = "extra-high",
-		width = 96,
-		height = 96,
+		width = 80,
+		height = 80,
 		shift = {0, 0}
   }
 })
