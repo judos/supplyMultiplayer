@@ -5,7 +5,7 @@ function update_info()
 	for _,player in pairs(game.players) do 
 		local frame = player.gui.top.supply
 		local level = levels[global.supply.level]
-		local table=frame.table
+		local table=frame.content.table
 		for itemName, count in pairs(level.requirements) do
 			local accumulated = global.supply.accumulated[itemName]
 			local label = table[itemName]
@@ -34,7 +34,7 @@ function update_time_left()
 	end
 	for _,player in pairs(game.players) do 
 		if player.gui.top.supply then
-			local label = player.gui.top.supply.time_left
+			local label = player.gui.top.supply.content.time_left
 			label.caption = {"", {"time-left"}, ": ", util.formattime(time_left)}
 			if time_left == 60 * 30 then
 				label.style.font_color = {r=1}
@@ -44,16 +44,24 @@ function update_time_left()
 end
 
 function updatePlayerGui(player)
-	if player.gui.top.supply then
-		player.gui.top.supply.destroy()
+	local frame = player.gui.top.supply
+	if frame then
+		info(frame.children_names)
+		for _,name in pairs(frame.children_names) do
+			frame[name].destroy()
+		end
+		info(frame.children_names)
+		frame.caption = {"", {"level"}, " ", global.supply.level}
+	else
+		frame = player.gui.top.add{type="frame", name="supply", direction="vertical", caption = {"", {"level"}, " ", global.supply.level}}
 	end
+	local content = frame.add{type="table", name="content", colspan=1}
 	local level = levels[global.supply.level] 
-	local frame = player.gui.top.add{type="frame", name="supply", direction="vertical", caption = {"", {"level"}, " ", global.supply.level}}
-	frame.add{type="label", name="time_left"}
-	frame.add{type="label", caption={"", {"points-per-second"}, ": ", pointsPerSecond()}}
-	frame.add{type="label", caption={"", {"points"}, ": ", math.floor(global.supply.points)}}
-	frame.add{type="label", caption={"", {"required-items"}, ":"}, style="caption_label_style"}
-	local table = frame.add{type="table", name="table", colspan=2}
+	content.add{type="label", name="time_left"}
+	content.add{type="label", name="pps", caption={"", {"points-per-second"}, ": ", pointsPerSecond()}}
+	content.add{type="label", name="pps_value", caption={"", {"points"}, ": ", math.floor(global.supply.points)}}
+	content.add{type="label", name="required_items", caption={"", {"required-items"}, ":"}, style="caption_label_style"}
+	local table = content.add{type="table", name="table", colspan=2}
 	for itemName,count in pairs(level.requirements) do
 		table.add{type="label", caption=game.item_prototypes[itemName].localised_name,name="t"..itemName}
 		table.add{type="label", caption="0/" .. count, name=itemName}
@@ -61,11 +69,11 @@ function updatePlayerGui(player)
 
 	if global.supply.level < #levels then
 		local next_level = levels[global.supply.level + 1]
-		frame.add{type="label", caption={"", {"next-level"}, ":"}, style="caption_label_style"}
-		local table = frame.add{type="table", colspan=2}
+		content.add{type="label", name="next_level_title", caption={"", {"next-level"}, ":"}, style="caption_label_style"}
+		local table2 = content.add{type="table", name="table2", colspan=2}
 		for itemName,count in pairs(next_level.requirements) do
-			table.add{type="label", caption=game.item_prototypes[itemName].localised_name}
-			table.add{type="label", caption=count}
+			table2.add{type="label", caption={"",game.item_prototypes[itemName].localised_name," "}}
+			table2.add{type="label", caption=count}
 		end
 	end
 	update_time_left()
