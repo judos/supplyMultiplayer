@@ -1,5 +1,8 @@
 test use cases:
 
-- level ends without enough items
 - level ends with enough items
 - player presses next level button (with/without items)
+
+Optional:
+- Constant decider with signal for missing / requested items
+- Health instead of instant failure of mission

@@ -42,10 +42,30 @@ end)
 
 script.on_event(defines.events.on_tick, function(event)
 	if event.tick % 60 ~= 0 then return end
-	
-	for index,player in pairs(game.players) do
-		calculateAccumulated()
-		update_info()
+
+	--	global.supply.level_started_at = game.tick + 300 - levels[game.supply.level].time
+	--	if global.supply.level_started_at < game.tick
+
+	calculateAccumulated()
+	update_info()
+	local time_left = get_time_left()
+	if time_left < 0 then
+		local fullFilled = isLevelRequirementFullfilled()
+		if fullFilled then
+			if subtractRequirements() then
+				local points_addition = global.supply.level * 10
+				PlayerPrint({"level-completed", global.level, points_addition})
+				nextLevel()
+			else
+				fullFilled = false
+			end
+		end
+		if not fullFilled then
+			for _,player in pairs(game.players) do
+				player.set_ending_screen_data({"points-achieved", global.supply.points})
+			end
+			game.set_game_state{game_finished=true, player_won=false}
+		end
 	end
 end)
 

@@ -18,12 +18,16 @@ function get_time_left()
 end
 
 function nextLevel()
+	local points_time = 0
+	local points_addition = global.supply.level * 10
 	local time_left = get_time_left()
 	local seconds_left = math.floor(time_left / 60)
-	local points_addition = math.floor(seconds_left * pointsPerSecond())
-	PlayerPrint({"time-bonus", points_addition, seconds_left})
-	global.supply.points = global.supply.points + points_addition
-	
+	if seconds_left > 0 then
+		points_time = math.floor(seconds_left * pointsPerSecond())
+		PlayerPrint({"time-bonus", points_time, seconds_left})
+	end
+	global.supply.points = global.supply.points + points_addition + points_time
+
 	global.supply.level = global.supply.level + 1
 	global.supply.level_started_at = game.tick
 	for _,player in pairs(game.players) do
