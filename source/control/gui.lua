@@ -36,7 +36,7 @@ function update_time_left()
 		if player.gui.top.supply then
 			local label = player.gui.top.supply.content.time_left
 			label.caption = {"", {"time-left"}, ": ", util.formattime(time_left)}
-			if time_left == 60 * 30 then
+			if time_left <= 60 * 30 then
 				label.style.font_color = {r=1}
 			end
 		end

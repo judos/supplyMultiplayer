@@ -32,6 +32,8 @@ script.on_event(defines.events.on_gui_click, function(event)
 	if event.element == player.gui.top.supply.nextButton then
 		if subtractRequirements() then
 			nextLevel()
+			calculateAccumulated()
+			update_info()
 		end
 	end
 end)
@@ -42,9 +44,6 @@ end)
 
 script.on_event(defines.events.on_tick, function(event)
 	if event.tick % 60 ~= 0 then return end
-
-	--	global.supply.level_started_at = game.tick + 300 - levels[game.supply.level].time
-	--	if global.supply.level_started_at < game.tick
 
 	calculateAccumulated()
 	update_info()
