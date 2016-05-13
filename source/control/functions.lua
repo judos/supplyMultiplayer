@@ -8,7 +8,7 @@ function addLevel(data)
 	if #data % 2 ~= 1 then error("level needs for every item an amount defined") end
 	local level={requirements={},time=data[1]}
 	for i=2,#data-1,2 do
-		table.insert(level.requirements,{name=data[i],count=data[i+1]})
+		level.requirements[data[i]]=data[i+1]
 	end
 	table.insert(levels,level)
 end
@@ -35,8 +35,8 @@ end
 function calculateAccumulated()
 	local level = levels[global.supply.level]
 	local accumulated = {}
-	for _,item in pairs(level.requirements) do
-		accumulated[item.name] = 0
+	for itemName,count in pairs(level.requirements) do
+		accumulated[itemName] = 0
 	end
 	for i = #global.supply.chests,1,-1 do
 		local chest = global.supply.chests[i]
@@ -51,8 +51,8 @@ end
 
 function isLevelRequirementFullfilled()
 	local level = levels[global.supply.level]
-	for _,item in pairs(level.requirements) do
-		if global.supply.accumulated[item.name] < item.count then return false end
+	for itemName,count in pairs(level.requirements) do
+		if global.supply.accumulated[itemName] < count then return false end
 	end
 	return true
 end

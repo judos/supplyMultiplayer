@@ -2,7 +2,7 @@ levels= {
 	-- 1
 	{
 		requirements = {
-			{ name = "stone", count = 15 }
+			stone = 15
 		},
 		time = 240,
 	}
