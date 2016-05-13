@@ -30,7 +30,6 @@ script.on_event(defines.events.on_gui_click, function(event)
 	local player = game.players[event.player_index]
 	if not player.gui.top.supply then return end
 	local name = event.element.name
-	info(name) 
 	if name == next_button then
 		if subtractRequirements() then
 			nextLevel()
@@ -39,6 +38,8 @@ script.on_event(defines.events.on_gui_click, function(event)
 		end
 	elseif name == close_button then
 		player.gui.top.supply.destroy()
+	elseif name == intro_button then
+		showNextDialog(player)
 	end
 end)
 

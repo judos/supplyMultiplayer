@@ -1,6 +1,5 @@
 
 function init()
-	showStartDialog()
 	if not global then global={} end
 	if not global.supply then
 		global.supply={}
@@ -16,16 +15,21 @@ function initPlayerWithIndex(index)
 	player.insert{name="supply-chest",count=1}
 	
 	updatePlayerGui(player)
+	showNextDialog(player)
 end
 
-function showStartDialog()
-	return
-	--[[
-	game.show_message_dialog{text = {"welcome"}}
-	game.show_message_dialog{text = {"rules1"}}
-	game.show_message_dialog{text = {"rules2"}}
-	game.show_message_dialog{text = {"rules3"}}
-	game.show_message_dialog{text = {"rules4"}}
-	game.show_message_dialog{text = {"rules5"}}
-	]]--
+function showNextDialog(player)
+	if player.gui.center.supply then
+		player.gui.center.supply.destroy()
+		return
+	end
+	
+	local frame = player.gui.center.add{type="frame",name="supply",direction="vertical",caption={"welcome"}}
+	frame.add{type="table",colspan="1",name="t"}
+	frame.t.add{type="label",caption={"rules1"} }
+	frame.t.add{type="label",caption={"rules2"} }
+	frame.t.add{type="label",caption={"rules3"} }
+	frame.t.add{type="label",caption={"rules4"} }
+	frame.t.add{type="label",caption={"rules5"} }
+	frame.t.add{type="button",caption="x",name=intro_button,style="close-button"}
 end
