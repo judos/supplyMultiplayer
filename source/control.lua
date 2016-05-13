@@ -54,7 +54,7 @@ script.on_event(defines.events.on_tick, function(event)
 		if fullFilled then
 			if subtractRequirements() then
 				local points_addition = global.supply.level * 10
-				PlayerPrint({"level-completed", global.level, points_addition})
+				PlayerPrint({"level-completed", global.supply.level, points_addition})
 				nextLevel()
 			else
 				fullFilled = false

@@ -14,14 +14,15 @@ function addLevel(data)
 end
 
 function get_time_left()
-	return global.supply.level_started_at + time_modifier * levels[global.supply.level].time * 60 - game.tick
+	local pastTime = global.supply.level_started_at - game.tick
+	return time_modifier * levels[global.supply.level].time * 60 + pastTime
 end
 
 function nextLevel()
 	local points_time = 0
 	local points_addition = global.supply.level * 10
 	local time_left = get_time_left()
-	local seconds_left = math.floor(time_left / 60)
+	local seconds_left = math.ceil(time_left / 60)
 	if seconds_left > 0 then
 		points_time = math.floor(seconds_left * pointsPerSecond())
 		PlayerPrint({"time-bonus", points_time, seconds_left})
