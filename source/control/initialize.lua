@@ -13,6 +13,7 @@ end
 
 function initPlayerWithIndex(index)
 	local player = game.players[index]
+	player.insert{name="supply-chest",count=1}
 	
 	updatePlayerGui(player)
 end
